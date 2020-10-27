@@ -38,3 +38,7 @@ class ShowModel(alchemy.Model):
     def delete_from_bd(self):
         alchemy.session.delete(self)
         alchemy.session.commit()
+
+    def update(self, name):
+        self.name = name
+        alchemy.session.commit()
