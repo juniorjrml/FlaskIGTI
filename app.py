@@ -50,6 +50,15 @@ def delete_show(id):
     show_deleted.delete_from_bd()
     return {'message': 'Excluido com sucesso'}, 202
 
+@app.route('/show/<int:id>', methods=['PATCH'])
+def update_show(id):
+    request_data = request.get_json()
+    show_altered = show.ShowModel.find_by_id(id)
+    show_altered.update(request_data['name'])
+
+    return jsonify(show_altered.json()), 200
+
+
 if __name__ == '__main__':
     from data import alchemy
     alchemy.init_app(app)
